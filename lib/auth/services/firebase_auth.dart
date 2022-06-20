@@ -13,7 +13,6 @@ class FirebaseAuthService {
 // logOut
 */
 
-
 /* Método signUpWithEmailAndPassword:
   Parámetros: name, username, email, password
 */
