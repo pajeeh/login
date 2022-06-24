@@ -1,16 +1,17 @@
-# login
+# App Login
 
-A new Flutter project.
+Projeto desenvolvido para a disciplina de Programação para Dispositivos Móveis, 
+ministrada pelo Prof. Dr. Ulisses Martins Dias.
 
-## Getting Started
+Para esse projeto, os alunos Luis e Caio escolheram a plataforma android,
+e utilizando o framework Flutter com a linguagem Dart.
 
-This project is a starting point for a Flutter application.
+## Sobre o projeto
 
-A few resources to get you started if this is your first Flutter project:
+Este projeto é apenas uma introdução à programação para dispositivos móveis, podendo servir de base para projetos futuros.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Todos os métodos utilizados durante o desenvolvimento, são conceitos básicos da programação orientada à objetos.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+O projeto App Login, consiste em uma aplicação complementar, que pode ser integrada com outros aplicativos, servindo como base para outros desenvolvedores que queiram utilizar em seus projetos.
+
+O App Login é um aplicativo que teve sua interface baseada em terminais de linha de comando, fazendo alusão à franquia de filmes [Matrix](https://www.culturagenial.com/filme-the-matrix/), o filme [Jogos de Guerra](https://www.adorocinema.com/filmes/filme-51719/) também serviu de inspiração para a criação do aplicativo, que traz um pouco de nostalgia à tecnologia ainda nos anos 80, 90 e anos 2000. Pequenas referências à elementos da subcultura [cyberpunk](https://www.youtube.com/watch?v=m7jnczCFVaA) também contribuíram para a criação do aplicativo.
