@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login/colors/colors.dart';
+import 'package:login/pages/reset_pass.dart';
 
 import '../components/skull.dart';
 import '../components/text_bottom.dart';
@@ -76,6 +77,13 @@ class _StatefulLoginPageState extends State<StatefulLoginPage> {
         offset: Offset(0, -1),
         color: Color.fromARGB(230, 255, 255, 255),
         blurRadius: 5.75),
+  ];
+  final shadowsRed = [
+    const Shadow(
+        // bottomLeft
+        offset: Offset(0, 0),
+        color: Color.fromARGB(255, 255, 128, 128),
+        blurRadius: 0),
   ];
 
   final _emailController = TextEditingController();
@@ -265,6 +273,8 @@ class _StatefulLoginPageState extends State<StatefulLoginPage> {
                     ),
                     Center(
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
                             height: 50,
@@ -275,8 +285,9 @@ class _StatefulLoginPageState extends State<StatefulLoginPage> {
                                 'Cadastrar-se',
                                 style: TextStyle(
                                   color: azulNeon,
-                                  fontSize: 15,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
+                                  fontFamily: 'CourierNew',
                                   shadows: shadowsBlue,
                                 ),
                               ),
@@ -284,16 +295,24 @@ class _StatefulLoginPageState extends State<StatefulLoginPage> {
                           ),
                           SizedBox(
                             height: 50,
-                            width: 150,
+                            width: 180,
                             child: TextButton(
-                              onPressed: widget.showRegisterPage,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const EsqueciPage(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 'Esqueci a senha',
                                 style: TextStyle(
-                                  color: azulNeon,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  shadows: shadowsBlue,
+                                  color: vermelho,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'CourierNew',
+                                  shadows: shadowsRed,
                                 ),
                               ),
                             ),
@@ -302,7 +321,7 @@ class _StatefulLoginPageState extends State<StatefulLoginPage> {
                       ),
                     ),
                     const Divider(
-                      height: 30,
+                      height: 50,
                       color: transparente,
                     ),
                     BottomText(),
