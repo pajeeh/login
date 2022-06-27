@@ -30,6 +30,14 @@ class _EsqueciPageState extends State<EsqueciPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
+              backgroundColor: preto,
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(
+                  color: verde,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
               title: const Text(
                 "E-mail enviado",
                 textAlign: TextAlign.center,
@@ -43,7 +51,7 @@ class _EsqueciPageState extends State<EsqueciPage> {
                   "Um e-mail foi enviado para você com instruções para redefinir sua senha.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: preto,
+                    color: verde,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   )),
@@ -87,7 +95,7 @@ class _EsqueciPageState extends State<EsqueciPage> {
           style: TextStyle(
             color: preto,
             fontSize: 21,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w900,
           ),
         ),
       ),
