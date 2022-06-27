@@ -67,7 +67,6 @@ class _UserAccountPageState extends State<UserAccountPage> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-
             //username
             Text(
               'Username: ${user!.displayName}',
