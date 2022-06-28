@@ -140,7 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: <Widget>[
                 const Divider(
                   color: transparente,
-                  height: 5,
+                  height: 150,
                 ),
                 const Center(
                   child: Text(
