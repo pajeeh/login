@@ -9,7 +9,6 @@ import 'package:login/styles/text_fields.dart';
 
 import '../colors/colors.dart';
 
-
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
   const RegisterPage({Key? key, required this.showLoginPage}) : super(key: key);
@@ -38,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   //String name, String username, String email, String password
 
-  Future signUp() async {
+  /*Future signUp() async {
     if (passwordConfirmed()) {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -53,13 +52,34 @@ class _RegisterPageState extends State<RegisterPage> {
             .doc(user!.uid)
             .set({
           'uid': user.uid,
-          'name': _nameController.text.trim(),
-          'username': _usernameController.text.trim(),
           'email': _emailController.text.trim(),
         });
       });
       return 'Sucesso';
     }
+  }*/
+
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      infoUser(
+        _nameController.text.trim(),
+        _usernameController.text.trim(),
+        _emailController.text.trim(),
+      );
+    }
+  }
+
+  Future infoUser(String nome, String username, String email) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'nome': nome,
+      'username': username,
+      'email': email,
+    });
   }
 
   bool passwordConfirmed() {

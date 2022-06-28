@@ -104,7 +104,7 @@ class WelcomeText extends StatelessWidget {
                 style: welcomeBranco,
               ),
               Text(
-                'Hacker News',
+                'App Login',
                 style: welcomeVerde,
               ),
             ],
