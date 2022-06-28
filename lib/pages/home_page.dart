@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login/pages/app_info.dart';
 import 'package:login/pages/user_account.dart';
 
 import '../colors/colors.dart';
@@ -153,10 +154,12 @@ class _DefaultHomePageState extends State<DefaultHomePage> {
                     fontWeight: FontWeight.w600,
                   )),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SobreApp(),
+                  ),
+                );
               },
             ),
           ],
