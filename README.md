@@ -3,7 +3,7 @@
 Projeto desenvolvido para a disciplina de Programação para Dispositivos Móveis, 
 ministrada pelo Prof. Dr. Ulisses Martins Dias.
 
-Para esse projeto, os alunos Luis e Caio escolheram a plataforma android,
+Para esse projeto, os alunos Luis Ra:256647 e Caio Ra: 256341 escolheram a plataforma android,
 e utilizando o framework Flutter com a linguagem Dart.
 
 ## Sobre o projeto
