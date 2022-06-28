@@ -15,11 +15,12 @@ class _UserAccountPageState extends State<UserAccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: preto,
       appBar: AppBar(
         centerTitle: true,
-
-        title: const Text('Minha Conta',
-        style:  TextStyle(
+        title: const Text(
+          'Minha Conta',
+          style: TextStyle(
             color: preto,
             fontSize: 25,
             fontFamily: 'CourierNew',
@@ -31,13 +32,47 @@ class _UserAccountPageState extends State<UserAccountPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            //ID
+            Text(
+              'ID: ${user!.uid}',
+              style: const TextStyle(
+                color: verde,
+                fontSize: 18,
+                fontFamily: 'CourierNew',
+                letterSpacing: 1.75,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            //nome
             Text(
               'Nome: ${user!.displayName}',
               style: const TextStyle(
-                color: preto,
-                fontSize: 20,
+                color: verde,
+                fontSize: 18,
+                fontFamily: 'CourierNew',
+                letterSpacing: 1.75,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            //email
+            Text(
+              'Email: ${user!.email}',
+              style: const TextStyle(
+                color: verde,
+                fontSize: 18,
+                fontFamily: 'CourierNew',
+                letterSpacing: 1.75,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            //username
+            Text(
+              'Username: ${user!.displayName}',
+              style: const TextStyle(
+                color: verde,
+                fontSize: 18,
                 fontFamily: 'CourierNew',
                 letterSpacing: 1.75,
                 fontWeight: FontWeight.w700,

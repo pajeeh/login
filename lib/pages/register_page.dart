@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,63 +9,6 @@ import 'package:login/styles/text_fields.dart';
 
 import '../colors/colors.dart';
 
-/*
-class RegisterPageCall extends StatefulWidget {
-  const RegisterPageCall({Key? key}) : super(key: key);
-
-  @override
-  State<RegisterPageCall> createState() => _RegisterPageCallState();
-}
-
-class _RegisterPageCallState extends State<RegisterPageCall> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: preto,
-        body: ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: <Widget>[
-            const Divider(color: transparente, height: 5),
-            const Text(
-              'Insira suas informações',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: verdeClaro,
-                fontSize: 20,
-                fontFamily: 'CourierNew',
-                letterSpacing: 1.0,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              //child: RegisterPage(),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: const Text(
-                'VOLTAR',
-                style: TextStyle(
-                  color: verdeNeon,
-                  fontSize: 22,
-                  fontFamily: 'CourierNew',
-                  letterSpacing: 1.0,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              onPressed: widget.showLoginPage,
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}*/
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -76,6 +20,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   //text controllers
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -83,6 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -90,12 +36,29 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  //String name, String username, String email, String password
+
   Future signUp() async {
     if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
-      );
+      )
+          .then((value) async {
+        User? user = FirebaseAuth.instance.currentUser;
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid)
+            .set({
+          'uid': user.uid,
+          'name': _nameController.text.trim(),
+          'username': _usernameController.text.trim(),
+          'email': _emailController.text.trim(),
+        });
+      });
+      return 'Sucesso';
     }
   }
 
@@ -136,6 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String? email;
   String? password;
   String? name;
+  String? username;
   bool agree = false;
 
   final pass = TextEditingController();
@@ -176,7 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: <Widget>[
                 const Divider(
                   color: transparente,
-                  height: 5,
+                  height: 150,
                 ),
                 const Center(
                   child: Text(
@@ -286,14 +250,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-                  onSaved: (val) {
-                    name = val;
-                  },
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Não pode ser vazio';
                     }
                     return null;
+                  },
+                  onSaved: (val) {
+                    username = val;
                   },
                 ),
 
@@ -471,15 +435,17 @@ class _RegisterPageState extends State<RegisterPage> {
                       value: agree,
                     ),
                     const Flexible(
-                      child: Text('Aceito os termos e blá blá blá...',
-                          maxLines: 2,
-                          style: TextStyle(
-                            color: verdeClaro,
-                            fontSize: 18,
-                            fontFamily: 'CourierNew',
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w600,
-                          )),
+                      child: Text(
+                        'Aceito os termos e blá blá blá...',
+                        maxLines: 2,
+                        style: TextStyle(
+                          color: verdeClaro,
+                          fontSize: 18,
+                          fontFamily: 'CourierNew',
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ],
                 ),

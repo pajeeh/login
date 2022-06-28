@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login/colors/colors.dart';
+import 'package:login/components/welcome.dart';
+import 'package:login/pages/reset_pass.dart';
 
 import '../components/skull.dart';
 import '../components/text_bottom.dart';
@@ -77,6 +79,13 @@ class _StatefulLoginPageState extends State<StatefulLoginPage> {
         color: Color.fromARGB(230, 255, 255, 255),
         blurRadius: 5.75),
   ];
+  final shadowsRed = [
+    const Shadow(
+        // bottomLeft
+        offset: Offset(0, 0),
+        color: Color.fromARGB(255, 255, 128, 128),
+        blurRadius: 0),
+  ];
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -99,220 +108,243 @@ class _StatefulLoginPageState extends State<StatefulLoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Center(
-      child: Form(
-        key: _formKey,
-        child: Scaffold(
-          backgroundColor: preto,
-          body: SafeArea(
-            top: true,
-            child: SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TopText(),
-                    const Divider(
-                      color: transparente,
-                    ),
-                    const Skull(),
-                    const Divider(
-                      color: transparente,
-                    ),
-                    TextFormField(
-                      controller: _emailController,
-                      cursorColor: verdeNeon,
-                      cursorWidth: 13,
-                      cursorHeight: 30,
-                      style: const TextStyle(
-                        color: verdeNeon,
-                        fontSize: 20,
-                      ),
-                      decoration: const InputDecoration(
-                        icon: Icon(
-                          Icons.person,
-                          size: 30,
-                          color: verdeNeon,
+        child: Form(
+      key: _formKey,
+      child: Scaffold(
+        backgroundColor: preto,
+        body: SingleChildScrollView(
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.all(0.15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        TopText(),
+                        const Divider(
+                          color: transparente,
+                          height: 25,
                         ),
-                        labelText: 'Email',
-                        labelStyle: TextStyle(
-                          color: verde,
-                          fontSize: 21,
-                          fontFamily: 'CourierNew',
-                          letterSpacing: 1,
-                          fontWeight: FontWeight.w600,
+                        const Skull(),
+                        const Divider(
+                          color: transparente,
+                          height: 20,
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: verdeMuitoEscuro,
-                            width: 5,
-                          ),
+                        WelcomeText(),
+                        const Divider(
+                          color: transparente,
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                        TextFormField(
+                          controller: _emailController,
+                          cursorColor: verdeNeon,
+                          cursorWidth: 13,
+                          cursorHeight: 30,
+                          style: const TextStyle(
                             color: verdeNeon,
-                            width: 2.75,
+                            fontSize: 20,
                           ),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Por favor, preencha o campo de email';
-                        }
-                        return null;
-                      },
-                      onSaved: (val) {
-                        _emailController.text = val!;
-                      },
-                    ),
-                    const Divider(
-                      color: transparente,
-                    ),
-                    TextFormField(
-                      controller: _passwordController,
-                      cursorColor: verdeNeon,
-                      cursorWidth: 13,
-                      cursorHeight: 30,
-                      obscureText: true,
-                      obscuringCharacter: '\u2731',
-                      style: const TextStyle(
-                        color: verdeClaro,
-                        fontSize: 25,
-                        fontFamily: 'CourierNew',
-                        letterSpacing: 1,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      decoration: const InputDecoration(
-                        icon: Icon(
-                          Icons.lock_sharp,
-                          size: 30,
-                          color: verdeNeon,
-                        ),
-                        labelText: 'Password',
-                        labelStyle: TextStyle(
-                          color: verde,
-                          fontSize: 21,
-                          fontFamily: 'CourierNew',
-                          letterSpacing: 1,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: verdeMuitoEscuro,
-                            width: 5,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: verdeNeon,
-                            width: 2.75,
-                          ),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Não pode ser vazio';
-                        }
-                        return null;
-                      },
-                      onSaved: (val) {
-                        _passwordController.text = val!;
-                      },
-                    ),
-                    const Divider(
-                      color: transparente,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      width: 150,
-                      child: Material(
-                        color: verdeNeon,
-                        borderRadius: BorderRadius.circular(10),
-                        child: MaterialButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-                              signIn();
-                            }
-                          },
-                          /*if (_emailController.text.trim().isNotEmpty &&
-                              _passwordController.text.trim().isNotEmpty) {
-                            signIn();
-                          }
-                        },*/
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                          ),
-                          minWidth: size.width * 0.4,
-                          height: size.height * 0.07,
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                              color: preto,
-                              fontSize: 32,
-                              shadows: shadowsGreen,
+                          decoration: const InputDecoration(
+                            icon: Icon(
+                              Icons.person,
+                              size: 30,
+                              color: verdeNeon,
+                            ),
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
+                              color: verde,
+                              fontSize: 21,
                               fontFamily: 'CourierNew',
-                              letterSpacing: 1.25,
-                              fontWeight: FontWeight.w800,
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: verdeMuitoEscuro,
+                                width: 5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: verdeNeon,
+                                width: 2.75,
+                              ),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Por favor, preencha o campo de email';
+                            }
+                            return null;
+                          },
+                          onSaved: (val) {
+                            _emailController.text = val!;
+                          },
+                        ),
+                        const Divider(
+                          color: transparente,
+                        ),
+                        TextFormField(
+                          controller: _passwordController,
+                          cursorColor: verdeNeon,
+                          cursorWidth: 13,
+                          cursorHeight: 30,
+                          obscureText: true,
+                          obscuringCharacter: '\u2731',
+                          style: const TextStyle(
+                            color: verdeClaro,
+                            fontSize: 25,
+                            fontFamily: 'CourierNew',
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          decoration: const InputDecoration(
+                            icon: Icon(
+                              Icons.lock_sharp,
+                              size: 30,
+                              color: verdeNeon,
+                            ),
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                              color: verde,
+                              fontSize: 21,
+                              fontFamily: 'CourierNew',
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: verdeMuitoEscuro,
+                                width: 5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: verdeNeon,
+                                width: 2.75,
+                              ),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Não pode ser vazio';
+                            }
+                            return null;
+                          },
+                          onSaved: (val) {
+                            _passwordController.text = val!;
+                          },
+                        ),
+                        const Divider(
+                          color: transparente,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 150,
+                          child: Material(
+                            color: verdeNeon,
+                            borderRadius: BorderRadius.circular(10),
+                            child: MaterialButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+                                  signIn();
+                                }
+                              },
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                              ),
+                              minWidth: size.width * 0.4,
+                              height: size.height * 0.07,
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: preto,
+                                  fontSize: 32,
+                                  shadows: shadowsGreen,
+                                  fontFamily: 'CourierNew',
+                                  letterSpacing: 1.25,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    const Divider(
-                      color: transparente,
-                    ),
-                    Center(
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: TextButton(
-                              onPressed: widget.showRegisterPage,
-                              child: Text(
-                                'Cadastrar-se',
-                                style: TextStyle(
-                                  color: azulNeon,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  shadows: shadowsBlue,
+                        const Divider(
+                          color: transparente,
+                        ),
+                        Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 60,
+                                width: 200,
+                                child: TextButton(
+                                  onPressed: widget.showRegisterPage,
+                                  child: Text(
+                                    'Cadastrar-se',
+                                    style: TextStyle(
+                                      color: azulNeon,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'CourierNew',
+                                      shadows: shadowsBlue,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: TextButton(
-                              onPressed: widget.showRegisterPage,
-                              child: Text(
-                                'Esqueci a senha',
-                                style: TextStyle(
-                                  color: azulNeon,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  shadows: shadowsBlue,
+                              SizedBox(
+                                height: 60,
+                                width: 200,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const EsqueciPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Esqueci a senha',
+                                    style: TextStyle(
+                                      color: vermelho,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: 'CourierNew',
+                                      shadows: shadowsRed,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        const Divider(
+                          color: transparente,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        BottomText(),
+                      ],
                     ),
-                    const Divider(
-                      height: 30,
-                      color: transparente,
-                    ),
-                    BottomText(),
-                  ],
-                ),
-              ),
-            ),
+                  )
+                ],
+              );
+            },
           ),
         ),
       ),
-    );
+    ));
   }
 }

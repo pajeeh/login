@@ -65,10 +65,10 @@ class BottomText extends StatelessWidget {
     const textBottomVerde = TextStyle(
       color: verdeHacker,
       shadows: shadowsGreen,
-      fontSize: 22,
+      fontSize: 25,
       fontFamily: 'CourierNew',
       fontWeight: FontWeight.w700,
-      letterSpacing: 0.5,
+      letterSpacing:1,
     );
     Size size = MediaQuery.of(context).size;
 
@@ -77,6 +77,8 @@ class BottomText extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: const EdgeInsets.all(5),
+          /*width: size.width,
+          height: size.height * 0.25,*/
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
