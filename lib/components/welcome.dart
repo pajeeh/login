@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../colors/colors.dart';
 
-class TopText extends StatelessWidget {
-  TopText({Key? key}) : super(key: key);
-
-  //get child => null;
+class WelcomeText extends StatelessWidget {
+  WelcomeText({Key? key}) : super(key: key);
 
   final shadowsWhite = [
     const Shadow(
@@ -75,22 +73,18 @@ class TopText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTopBranco = TextStyle(
-      color: branco,
-      fontSize: 22,
-      shadows: shadowsWhite,
-      fontFamily: 'CourierNew',
-      letterSpacing: 0.75,
-      fontWeight: FontWeight.w600,
-    );
-    final textTopVerde = TextStyle(
-      color: verdeHacker,
-      fontSize: 32,
-      shadows: shadowsGreen,
-      fontFamily: 'CourierNew',
-      letterSpacing: 1,
-      fontWeight: FontWeight.w800,
-    );
+    final welcomeBranco = TextStyle(
+        color: branco,
+        fontSize: 32,
+        shadows: shadowsWhite,
+        letterSpacing: 0.75,
+        fontWeight: FontWeight.w600);
+    final welcomeVerde = TextStyle(
+        color: verdeNeon,
+        fontSize: 32,
+        shadows: shadowsGreen,
+        letterSpacing: 0.75,
+        fontWeight: FontWeight.w600);
 
     return Stack(
       alignment: Alignment.center,
@@ -102,12 +96,16 @@ class TopText extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'There\'s no place like',
-                style: textTopBranco,
+                'Welcome',
+                style: welcomeBranco,
               ),
               Text(
-                '127.0.0.1',
-                style: textTopVerde,
+                'to',
+                style: welcomeBranco,
+              ),
+              Text(
+                'Hacker News',
+                style: welcomeVerde,
               ),
             ],
           ),

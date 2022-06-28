@@ -9,63 +9,6 @@ import 'package:login/styles/text_fields.dart';
 
 import '../colors/colors.dart';
 
-/*
-class RegisterPageCall extends StatefulWidget {
-  const RegisterPageCall({Key? key}) : super(key: key);
-
-  @override
-  State<RegisterPageCall> createState() => _RegisterPageCallState();
-}
-
-class _RegisterPageCallState extends State<RegisterPageCall> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: preto,
-        body: ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: <Widget>[
-            const Divider(color: transparente, height: 5),
-            const Text(
-              'Insira suas informações',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: verdeClaro,
-                fontSize: 20,
-                fontFamily: 'CourierNew',
-                letterSpacing: 1.0,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              //child: RegisterPage(),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: const Text(
-                'VOLTAR',
-                style: TextStyle(
-                  color: verdeNeon,
-                  fontSize: 22,
-                  fontFamily: 'CourierNew',
-                  letterSpacing: 1.0,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              onPressed: widget.showLoginPage,
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}*/
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
